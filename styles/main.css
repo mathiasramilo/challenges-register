@@ -5,6 +5,7 @@
   --color-background: #f4f4f4;
 }
 
+/* Reset & Base */
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -63,7 +64,7 @@ main {
   flex-direction: column;
   justify-content: center;
   padding: 1.4em;
-  padding-top: 2.8em;
+  padding-top: 4em;
 }
 
 form {
