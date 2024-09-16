@@ -74,6 +74,7 @@ main {
   justify-content: center;
   padding: 1.4em;
   padding-top: 4em;
+  overflow-y: scroll;
 }
 
 form {
@@ -150,6 +151,12 @@ form {
             opacity: 0.5;
           }
         }
+      }
+
+      .error-message {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--color-primary);
       }
     }
   }

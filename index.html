@@ -26,7 +26,7 @@
           <p class="logo">A Logo</p>
         </div>
 
-        <form action="">
+        <form action="" id="sign-up-form">
           <header>
             <h1>Sign up</h1>
             <p>If you already have an account register</p>
@@ -47,6 +47,7 @@
                   placeholder="Enter your email address"
                 />
               </div>
+              <span id="email-error" class="error-message"></span>
             </div>
 
             <div class="form-field">
@@ -62,6 +63,7 @@
                   placeholder="Enter your User name"
                 />
               </div>
+              <span id="username-error" class="error-message"></span>
             </div>
 
             <div class="form-field">
@@ -81,6 +83,7 @@
                   <span class="sr-only">Show password</span>
                 </button>
               </div>
+              <span id="password-error" class="error-message"></span>
             </div>
 
             <div class="form-field">
@@ -90,7 +93,7 @@
                   <img src="images/padlock.png" alt="" />
                 </label>
                 <input
-                  type="confirm-password"
+                  type="password"
                   id="confirm-password"
                   name="confirm-password"
                   placeholder="Confirm your Password"
@@ -100,6 +103,7 @@
                   <span class="sr-only">Show password</span>
                 </button>
               </div>
+              <span id="confirm-password-error" class="error-message"></span>
             </div>
           </fieldset>
 
@@ -107,5 +111,7 @@
         </form>
       </main>
     </section>
+
+    <script src="javascript/main.js"></script>
   </body>
 </html>
