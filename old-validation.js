@@ -40,11 +40,7 @@ const validateForm = (formData) => {
     confirmPassword: '',
   };
 
-  const fieldValues = {};
-
-  for (let [name, value] of formData) {
-    fieldValues[name] = value;
-  }
+  const fieldValues = Object.fromEntries(formData);
 
   const emailValidation = validateEmail(fieldValues.email);
   if (!emailValidation.result) errors.email = emailValidation.message;
@@ -54,7 +50,7 @@ const validateForm = (formData) => {
 
   const passwordValidation = validatePassword(
     fieldValues.password,
-    fieldValues['confirm-password']
+    fieldValues['confirm-password'],
   );
   if (!passwordValidation.result) {
     errors.password = passwordValidation.passwordMessage;
@@ -65,10 +61,9 @@ const validateForm = (formData) => {
 };
 
 const validateEmail = (email) => {
-  const validDomains = ['gmail.com', 'hotmail.com', 'lightit.io'];
+  const re = /^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|lightit\.io)$/;
 
-  const domain = email.split('@')[1];
-  if (validDomains.includes(domain)) {
+  if (re.test(email)) {
     return { result: true };
   } else {
     return {
