@@ -1,11 +1,9 @@
-import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
 import { poppins } from "@/app/fonts";
 import { cn } from "@/lib/utils";
 
-interface ButtonProps
-  extends ComponentPropsWithoutRef<"button">,
-    PropsWithChildren {}
+type ButtonProps = ComponentPropsWithoutRef<"button">;
 
 export const Button = ({ children, ...props }: ButtonProps) => {
   return (
