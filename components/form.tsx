@@ -75,7 +75,7 @@ export const Form = () => {
   if (isSubmitting) {
     return (
       <div className="flex w-full items-center justify-center">
-        <Spinner />
+        <Spinner size="lg" color="red" />
       </div>
     );
   }
