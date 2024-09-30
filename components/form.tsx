@@ -7,7 +7,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Input, Button } from '@/components';
+import { Input, Button, Spinner, Success } from '@/components';
 
 interface FormFields {
   email: string;
@@ -57,16 +57,32 @@ export const UserSchema = z
 export const Form = () => {
   const {
     register,
-    formState: { errors, disabled, isLoading, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
     handleSubmit,
   } = useForm<FormFields>({
     resolver: zodResolver(UserSchema),
   });
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
-    console.log(data);
-    alert('Form submitted');
+    return new Promise((resolve) =>
+      setTimeout(() => {
+        resolve('Form submitted successfully');
+        console.log(data);
+      }, 2000),
+    );
   };
+
+  if (isSubmitting) {
+    return (
+      <div className="flex w-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (isSubmitSuccessful) {
+    return <Success />;
+  }
 
   return (
     <form className="flex flex-col gap-12" onSubmit={handleSubmit(onSubmit)}>
@@ -149,7 +165,7 @@ export const Form = () => {
           placeholder="Confirm your password"
         />
       </fieldset>
-      <Button disabled={disabled || isLoading || isSubmitting}>Register</Button>
+      <Button disabled={isSubmitting}>Register</Button>
     </form>
   );
 };

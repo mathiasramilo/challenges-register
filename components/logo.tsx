@@ -1,13 +1,12 @@
-import { ComponentPropsWithoutRef } from "react";
-import { poppins } from "@/app/fonts";
-import { cn } from "@/lib/utils";
+import type { ComponentPropsWithoutRef } from 'react';
+import Image from 'next/image';
 
-type LogoProps = ComponentPropsWithoutRef<"p">;
+type LogoProps = ComponentPropsWithoutRef<'div'>;
 
 export const Logo = ({ className, ...props }: LogoProps) => {
   return (
-    <p className={cn(poppins.className, "font-semibold", className)} {...props}>
-      A Logo
-    </p>
+    <div className={className} {...props}>
+      <Image src="/logo.png" alt="Logo" width={128} height={64} />
+    </div>
   );
 };

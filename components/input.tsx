@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import type { ComponentPropsWithoutRef } from 'react';
 import type { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
@@ -23,10 +24,18 @@ export const Input = <T extends FieldValues>({
 }: InputProps<T>) => {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-sm font-semibold">
+      <label
+        htmlFor={id}
+        className={cn('text-sm font-semibold', error && 'text-red-600')}
+      >
         {label}
       </label>
-      <div className="flex items-center gap-2 border-b-2 border-b-gray-500 pb-1 transition-all focus-within:border-b-red-600">
+      <div
+        className={cn(
+          'flex items-center gap-2 overflow-hidden rounded-t-lg border-b-2 border-b-gray-500 bg-white p-3 transition-all focus-within:border-b-red-600',
+          error && 'border-b-red-600',
+        )}
+      >
         <label htmlFor={id}>{leftAdornment}</label>
         <input
           id={id}
