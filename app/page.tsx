@@ -3,7 +3,7 @@ import { Logo, Form } from '@/components';
 
 export default function Home() {
   return (
-    <section className="flex min-h-screen w-full overflow-hidden bg-white md:max-h-[85vh] md:w-[75%] md:rounded-lg">
+    <section className="flex min-h-screen w-full overflow-hidden bg-white md:max-h-[85vh] md:w-3/4 md:rounded-lg">
       <aside className="relative hidden flex-[3] md:block">
         <Image
           src="/sign-up.jpg"

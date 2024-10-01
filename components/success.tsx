@@ -1,8 +1,8 @@
 import type { ComponentPropsWithoutRef } from 'react';
-import Image from 'next/image';
 
 import { cn } from '@/lib/utils';
 import { ubuntu } from '@/app/fonts';
+import { ConfettiIcon } from './icons';
 
 type SuccessProps = ComponentPropsWithoutRef<'div'>;
 
@@ -15,12 +15,7 @@ export const Success = ({ className, ...props }: SuccessProps) => {
       )}
       {...props}
     >
-      <Image
-        src="/confetti-minimalistic.png"
-        alt="Confetti"
-        width={42}
-        height={42}
-      />
+      <ConfettiIcon width={42} height={42} />
       <p
         className={cn(
           ubuntu.className,
