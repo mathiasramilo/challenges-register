@@ -1,15 +1,57 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import { useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Input, Button } from '@/components';
+import { userSchema } from '@/lib/schemas';
+import {
+  Input,
+  Button,
+  Spinner,
+  Success,
+  EmailIcon,
+  UserIcon,
+  LockIcon,
+  EyeClosedIcon,
+} from '@/components';
+
+type UserFormValues = z.infer<typeof userSchema>;
 
 export const Form = () => {
-  const handleRegister = () => {};
+  const {
+    register,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+    handleSubmit,
+  } = useForm<UserFormValues>({
+    resolver: zodResolver(userSchema),
+  });
+
+  const onSubmit: SubmitHandler<UserFormValues> = (data) => {
+    return new Promise((resolve) =>
+      setTimeout(() => {
+        resolve('Form submitted successfully');
+        console.log(data);
+      }, 2000),
+    );
+  };
+
+  if (isSubmitting) {
+    return (
+      <div className="flex w-full items-center justify-center">
+        <Spinner size="lg" color="red" />
+      </div>
+    );
+  }
+
+  if (isSubmitSuccessful) {
+    return <Success />;
+  }
 
   return (
-    <form action="" className="flex flex-col gap-12">
+    <form className="flex flex-col gap-12" onSubmit={handleSubmit(onSubmit)}>
       <header className="flex flex-col gap-1">
         <h1 className="mb-4 text-3xl font-medium text-gray-900">Sign up</h1>
         <p>If you already have an account registered</p>
@@ -23,69 +65,65 @@ export const Form = () => {
 
       <fieldset className="flex flex-col gap-5">
         <Input
+          fieldName="email"
+          register={register}
           label="Email"
-          leftAdornment={
-            <Image src="/message.png" alt="" width={16} height={16} />
-          }
-          error="error"
+          leftAdornment={<EmailIcon width={16} height={16} />}
+          error={errors.email?.message}
           type="email"
           id="email"
-          name="email"
           placeholder="Enter your email address"
         />
         <Input
+          fieldName="username"
+          register={register}
           label="Username"
-          leftAdornment={
-            <Image src="/user.png" alt="" width={16} height={16} />
-          }
-          error="error"
+          leftAdornment={<UserIcon width={16} height={16} />}
+          error={errors.username?.message}
           type="text"
           id="username"
-          name="username"
           placeholder="Enter your user name"
         />
         <Input
+          fieldName="password"
+          register={register}
           label="Password"
-          leftAdornment={
-            <Image src="/padlock.png" alt="" width={16} height={16} />
-          }
+          leftAdornment={<LockIcon width={16} height={16} />}
           rightAdornment={
             <button
               type="button"
               className="appearance-none border-none bg-transparent active:opacity-50"
             >
-              <Image src="/invisible.png" alt="" width={16} height={16} />
+              <EyeClosedIcon width={16} height={16} />
               <span className="sr-only">Show password</span>
             </button>
           }
-          error="error"
+          error={errors.password?.message}
           type="password"
           id="password"
-          name="password"
           placeholder="Enter your password"
         />
         <Input
+          fieldName="confirmPassword"
+          register={register}
           label="Confirm Password"
-          leftAdornment={
-            <Image src="/padlock.png" alt="" width={16} height={16} />
-          }
+          leftAdornment={<LockIcon width={16} height={16} />}
           rightAdornment={
             <button
               type="button"
               className="appearance-none border-none bg-transparent active:opacity-50"
             >
-              <Image src="/invisible.png" alt="" width={16} height={16} />
+              <EyeClosedIcon width={16} height={16} />
               <span className="sr-only">Show password</span>
             </button>
           }
-          error="error"
+          error={errors.confirmPassword?.message}
           type="password"
           id="confirm-password"
-          name="confirm-password"
           placeholder="Confirm your password"
         />
       </fieldset>
-      <Button onClick={handleRegister}>Register</Button>
+      <Button disabled={isSubmitting}>Register</Button>
     </form>
   );
 };
